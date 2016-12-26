@@ -75,6 +75,7 @@ namespace WindowsFormsApplication1 {
 	private: System::Windows::Forms::Button^  button5;
 	private: System::Windows::Forms::ToolStripMenuItem^  退出ToolStripMenuItem;
 
+
 	private:
 		/// <summary>
 		/// 必需的设计器变量。
@@ -88,6 +89,8 @@ namespace WindowsFormsApplication1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::Windows::Forms::DataGridViewCellStyle^  dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^  dataGridViewCellStyle4 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->文件ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->源文件ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -126,7 +129,7 @@ namespace WindowsFormsApplication1 {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(1101, 25);
+			this->menuStrip1->Size = System::Drawing::Size(1077, 25);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -275,7 +278,25 @@ namespace WindowsFormsApplication1 {
 			// dataGridView1
 			// 
 			this->dataGridView1->BackgroundColor = System::Drawing::SystemColors::ButtonFace;
+			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle3->BackColor = System::Drawing::SystemColors::Control;
+			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"宋体", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(134)));
+			dataGridViewCellStyle3->ForeColor = System::Drawing::SystemColors::WindowText;
+			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle3->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle3->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dataGridView1->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			dataGridViewCellStyle4->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle4->BackColor = System::Drawing::SystemColors::Window;
+			dataGridViewCellStyle4->Font = (gcnew System::Drawing::Font(L"宋体", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(134)));
+			dataGridViewCellStyle4->ForeColor = System::Drawing::SystemColors::ControlText;
+			dataGridViewCellStyle4->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle4->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle4->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
+			this->dataGridView1->DefaultCellStyle = dataGridViewCellStyle4;
 			this->dataGridView1->Location = System::Drawing::Point(821, 53);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->ReadOnly = true;
@@ -342,7 +363,7 @@ namespace WindowsFormsApplication1 {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 12);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1101, 603);
+			this->ClientSize = System::Drawing::Size(1077, 603);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
@@ -354,6 +375,7 @@ namespace WindowsFormsApplication1 {
 			this->Controls->Add(this->richTextBox2);
 			this->Controls->Add(this->richTextBox1);
 			this->Controls->Add(this->menuStrip1);
+			this->Font = (gcnew System::Drawing::Font(L"宋体", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(134)));
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Form1";
 			this->Text = L"TinyCLangCompilier";
@@ -365,6 +387,7 @@ namespace WindowsFormsApplication1 {
 
 		}
 #pragma endregion
+	private:int textLine;
 	public:void MarshalString(String ^ s, string& os) {
 		using namespace Runtime::InteropServices;
 		const char* chars =
@@ -441,6 +464,7 @@ namespace WindowsFormsApplication1 {
 		
 		StreamReader^ file = gcnew StreamReader(fileName);
 		String^ str = file->ReadToEnd();
+		file->Close();
 		richTextBox2->Text=str;
 
 	}
@@ -448,7 +472,17 @@ private: System::Void 运行ToolStripMenuItem_Click(System::Object^  sender, Syste
 	//HINSTANCE hNewExe = ShellExecuteA(NULL, "open", "d:\\tese.log", NULL, NULL, SW_SHOW);
 }
 private: System::Void 保存文件ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+	String ^saveText = richTextBox2->Text;
+	fileName = "";
 	saveFileDialog1->ShowDialog();
+	if (saveFileDialog1->FileName != ""){
+
+		fileName = saveFileDialog1->FileName;
+		MessageBox::Show(fileName);
+		richTextBox2->SaveFile(fileName, RichTextBoxStreamType::PlainText);
+	}
+	else
+		MessageBox::Show("尚未打开文件");
 }
 private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  e) {
 }
