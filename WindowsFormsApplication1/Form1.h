@@ -198,6 +198,7 @@ namespace WindowsFormsApplication1 {
 			this->目标代码生成ToolStripMenuItem->Name = L"目标代码生成ToolStripMenuItem";
 			this->目标代码生成ToolStripMenuItem->Size = System::Drawing::Size(153, 22);
 			this->目标代码生成ToolStripMenuItem->Text = L"目标代码生成";
+			this->目标代码生成ToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::目标代码生成ToolStripMenuItem_Click);
 			// 
 			// 编译masmToolStripMenuItem
 			// 
@@ -335,6 +336,7 @@ namespace WindowsFormsApplication1 {
 			this->button5->Text = L"目标代码";
 			this->button5->UseVisualStyleBackColor = true;
 			this->button5->Visible = false;
+			this->button5->Click += gcnew System::EventHandler(this, &Form1::button5_Click);
 			// 
 			// Form1
 			// 
@@ -560,10 +562,9 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 }
 private: System::Void 优化ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	button4->Visible = true;
-	divide_block();
 	opt_constant();
 	opt_common();
-	//richTextBox1->Text += result.ToString();
+	richTextBox1->Text += "优化成功\n";
 }
 private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
 	richTextBox2->Text = "";
@@ -578,15 +579,22 @@ private: System::Void button4_Click(System::Object^  sender, System::EventArgs^ 
 		tempcodeText += temp;
 		temp = "";
 	}
-	for (auto t : basic_block){
-		temp += t.ToString(); temp += "\n";
-		tempcodeText += temp;
-		temp = "";
-	}
 	richTextBox2->Text = tempcodeText;
 }
 private: System::Void 退出ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	Application::Exit();
+}
+private: System::Void 目标代码生成ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+	createObjectCode();
+	button5->Visible = true;
+}
+private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
+	String ^objectCodeText;
+	String ^temp;
+	for (auto t : object_code){
+		objectCodeText += gcnew String(t.c_str()); objectCodeText += "\n";
+	}
+	richTextBox2->Text = objectCodeText;
 }
 };
 }

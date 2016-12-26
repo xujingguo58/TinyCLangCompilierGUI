@@ -21,10 +21,6 @@ void divide_block()  {//划分基本块
 			basic_block.push_back(i);
 		}
 	}
-	cout << "划分基本块" << endl;
-	for (auto b : basic_block){
-		cout << b << endl;
-	}
 
 }
 
@@ -89,7 +85,7 @@ void opt_constant(){//优化常数
 		i++;
 	}
 
-	cout << "delCount" << delCount << endl;
+
 	for (int k = 0; k < delCount; k++){
 		temp_code.pop_back();
 		basic_block.pop_back();

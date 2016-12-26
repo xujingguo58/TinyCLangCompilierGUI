@@ -96,6 +96,7 @@
     <ClInclude Include="Form1.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="objectCode.h" />
     <ClInclude Include="optimize.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="semantic.h" />

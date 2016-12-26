@@ -5,6 +5,7 @@
 #include"semantic.h"
 #include"symbolTable.h"
 #include"optimize.h"
+#include"objectCode.h"
 
 //定义函数
 int relation_operator();  //关系运算符
