@@ -10,7 +10,7 @@ struct Token{
 	int token_number;
 	int line;
 }token[200];
-
+//vector<Token> token(200);
 int p = 0;//指针
 int input_line;//行数
 
@@ -288,12 +288,7 @@ int getToken(char *filename)//输入
 		token[i].token_number = 404;
 	}
 
-	if (fp == NULL)
-	{
-		
-		//cout << "error!";
-		//exit(0);
-	}
+	p = 0;
 	int state_now = 0;//现在状态
 	int state_before = 0;//上一状态
 
@@ -325,8 +320,7 @@ int getToken(char *filename)//输入
 		}
 	}
 
-//	for (int i = 0; i < p; i++)
-	//	cout << token[i].token_name << " " << token[i].token_number << " " << token[i].line << endl;
+	p = 0;
 	return 1;
 }
 

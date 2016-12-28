@@ -92,7 +92,7 @@ int checkIdentifierTable(string identifier, int type){   //检查标识符表是否存在
 		if (t.name == identifier&&t.type != type)
 			return -1;
 	}
-	//return 0;
+	return 0;
 }
 void addIdentifierTable(string identifier, int type){  //添加新项到标识符表
 	//identifier_table.push_back(identifier);

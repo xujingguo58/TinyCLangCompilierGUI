@@ -111,6 +111,7 @@ void opt_common(){//优化公因子
 								if (temp_code[k].op == temp_code[j].op){
 									//cout << "here" << endl;
 									temp_code[k].result = temp_code[j].result;
+									temp_code[k + 1].arg1 = temp_code[j].result;
 								}
 				}
 		}

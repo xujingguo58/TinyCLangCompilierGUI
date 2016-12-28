@@ -7,6 +7,7 @@
 #include"optimize.h"
 #include"objectCode.h"
 
+
 //定义函数
 int relation_operator();  //关系运算符
 int arithmetic_expression();//算数表达式
@@ -117,7 +118,7 @@ int assignment(){        //<赋值>
 		return 1200;  //表达式右值错误；
 }
 int relation_operator(){
-	if (now_number == 20 || now_number == 21 || now_number == 22 || now_number == 23 || now_number == 24 || now_number == 25)
+	if (now_number == 20 || now_number == 21 || now_number == 22 || now_number == 23 || now_number == 24 || now_number == 25 || now_number == 39 || now_number == 40)
 		return 1;
 	else
 		return 1007;//neeed operator
@@ -247,11 +248,12 @@ int conditional_statement(){   //条件语句
 	//nextW();
 	nextW();
 	if (now_number == 10){
-		send("ie", "_", "_", "_");  //else
+		send("el", "_", "_", "_");
+		//send("ie", "_", "_", "_");  //else
 		result = else_statement();
 		if (result >= 1000) return result;
 		else{
-			send("el", "_", "_", "_");
+			//send("el", "_", "_", "_");
 			return 1;
 		}
 	}
@@ -288,7 +290,7 @@ int code_block(){
 		else if (now_number == 0){  //标识符，说明是赋值语句
 			//判断标识符是否的定义
 			if (checkIdentifierTable(now_name, now_number) == 0){  //说明未定义 
-
+				cout << "here";
 				return 3002;
 			}
 			semantic_stack.push(now_name);
@@ -348,11 +350,11 @@ int branch_program(){
 		nextW();
 		if (now_number == 34)  return 1;//现在为{}说明中间没有代码
 		int result = code_block();
-		if (result > 1000) return result;
+		if (result >= 1000) return result;
 		nextW();
 		if (now_number == 34) {
 			//cout << "right";
-			return 1;
+			//return 1;
 		}
 		else
 		{
@@ -373,7 +375,7 @@ int program(){
 		nextW();
 		if (now_number == 34) {
 			//cout << "right";
-			return 1;
+			//return 1;
 		}
 		else
 		{
@@ -395,9 +397,10 @@ int main_function(){
 				nextW();
 				if (now_number == 38){
 					nextW();
-					program();
-					//int result = checkTempCode();   //检查中间代码
-					//if (result > 1000) return result;
+					int result = program();
+					if (result > 1000) return result;
+					result = checkTempCode();   //检查中间代码
+					if (result > 1000) return result;
 				}
 				else
 					return 1004;//need ')'
@@ -424,7 +427,8 @@ int entrance(){
 					nextW();
 					if (now_number == 21){
 						nextW();
-						main_function();
+						int result = main_function();
+						return result;
 					}
 					else
 						return 1000;
@@ -447,6 +451,7 @@ int entrance(){
 
 int  syntax(){
 	p = 0;
+	line = 1;
 	int result = entrance();
 	if (result >= 1000)
 		return result;

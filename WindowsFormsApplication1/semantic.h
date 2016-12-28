@@ -1,7 +1,7 @@
 
 #include<stack>
 #include <sstream>
-//目标代码生成
+//中间代码生成
 
 struct tempCode
 {
@@ -28,6 +28,8 @@ string getT(){  //申请临时变量
 	t++;
 	return result;
 }
+
+
 //四元式函数定义
 string semantic_stack_pop(){  //弹出语义栈顶部元素
 	string top = semantic_stack.top();
